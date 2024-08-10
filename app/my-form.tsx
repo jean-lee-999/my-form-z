@@ -21,6 +21,7 @@ export default function MyForm() {
           first: "",
           last: "",
           email: "",
+          ...(state.fields ?? {}) // if fiels exist, override the default values
         },
     });
 
@@ -28,6 +29,15 @@ export default function MyForm() {
       
     return (
         <div>
+            {
+                state.issues && (
+                    <div className="text-red-500">
+                        <ul>
+                            {state.issues.map(issue => (<li key={issue}>{issue}</li>))}
+                        </ul>
+                    </div>
+                )
+            }
             <form 
                 ref={formRef}
                 action={formAction} 
